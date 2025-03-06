@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+:root {
+  font-family: 'Montserrat Alternates', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@theme {
+  --color-main: #EDBF68;
+  --color-side: #f0ead2;
+  --color-font:#fff;
+  --color-tile: #5f4e33;
+  --color-button:#f4b115;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient( #b07d62, #8a5a44);
+}
+
