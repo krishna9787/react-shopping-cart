@@ -1,7 +1,9 @@
-import { useRef, forwardRef, useImperativeHandle } from "react"
+import { useContext, useRef, forwardRef, useImperativeHandle } from "react"
 import { createPortal } from "react-dom"
+import { CartContext } from "../store/shopping-cart-context"
 
-const Modal = forwardRef(function Modal({ items, updateCart }, ref) {
+const Modal = forwardRef(function Modal({}, ref) {
+    const  { items, updateCart } = useContext(CartContext)
     const dialogRef = useRef()
     useImperativeHandle(ref, () => {
         return {
@@ -18,14 +20,14 @@ const Modal = forwardRef(function Modal({ items, updateCart }, ref) {
             <h2 className="uppercase m-4 text-2xl text-side font-bold">Your Cart</h2>
             <ul className="w-full">
                 {items.map((item) => 
-                    (<li className="bg-button items-center justify-items-end grid grid-cols-5 my-4 mx-2 rounded-md px-4" key={item.id}>
+                    (<li className="bg-button items-center justify-items-end grid grid-cols-4 my-4 mx-2 rounded-md px-4" key={item.id}>
                         <p className="md:text-2xl sm:text-xl">{item.title}</p>
                         <p className="md:text-2xl sm:text-xl">${item.price}</p>
                         <div className="flex gap-30 flex-row justify-center">
                             <p className="md:text-2xl sm:text-xl hover:text-red-700 cursor-pointer"><button onClick={() => updateCart({id:item.id, symbol:'-'})} className="cursor-pointer">-</button></p>
+                            <p className="md:text-2xl sm:text-xl">{item.quantity}</p>
                             <p className="md:text-2xl sm:text-xl hover:text-emerald-700"><button onClick={() => updateCart({id:item.id, symbol:'+'})} className="cursor-pointer">+</button></p>
                         </div>
-                        <p className="md:text-2xl sm:text-xl">{item.quantity}</p>
                         <p className="md:text-2xl sm:text-xl font-bold">${Math.round((item.quantity * item.price)*100)/100}</p>
                     </li>
                 )

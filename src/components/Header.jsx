@@ -1,7 +1,11 @@
-import {useRef} from "react"
+import {useContext, useRef} from "react"
 import logo from "../assets/logo.png"
 import Modal from "./Modal"
-export default function Header({ items, updateCart={handleUpdateQuantity} }) {
+import { CartContext } from "../store/shopping-cart-context"
+
+
+export default function Header() {
+    const { items } = useContext(CartContext)
     const dialog = useRef()
 
     function openModal() {
@@ -9,7 +13,7 @@ export default function Header({ items, updateCart={handleUpdateQuantity} }) {
     }
     return (
         <header className="w-full md:h-40">
-            <Modal ref={dialog} items={items} updateCart={updateCart}/>
+            <Modal ref={dialog} />
             <div className="md:w-full md:h-full sm:w-fit sm:h-fit sm:flex md:flex-row sm:flex-col md:gap-16 align-middle justify-evenly m-8">
                 <img className="w-30" src={logo} alt="logo" />
                 <h1 className="md:mt-10 md:text-5xl sm:text-2xl align-middle font-bold uppercase text-main">Elegant Context</h1>
